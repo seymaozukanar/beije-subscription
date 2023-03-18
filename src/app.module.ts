@@ -5,14 +5,15 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { User } from './user/user.entity';
+import { AddressModule } from './address/address.module';
 
 
 @Module({
   imports: [UserModule,
             TypeOrmModule.forRoot({
               type: 'mysql',
-              host: 'localhost',
-              port: 3306,
+              host: '127.0.0.1',
+              port: 3000,
               username: 'root',
               password: 'root',
               database: 'test',
@@ -20,6 +21,7 @@ import { User } from './user/user.entity';
               synchronize: true,
               autoLoadEntities: true,
       }),
+            AddressModule,
   ],
   controllers: [AppController],
   providers: [AppService],

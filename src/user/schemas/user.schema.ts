@@ -12,18 +12,25 @@ export const UserSchema = new EntitySchema<User>({
         },
         username: {
             type: String,
+            nullable: false, 
+            unique: true,
+            length: 30,
         },
         firstName: {
             type: String,
+            length: 30,
         },
         lastName: {
             type: String,
+            length: 30,
         },
         email: {
             type: String,
+            nullable: false,
         },
         password: {
             type: String,
+            nullable: false,
         },
     },
     relations: {

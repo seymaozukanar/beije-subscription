@@ -1,7 +1,10 @@
 import { Controller, Get, Post, Delete, Body, Param, NotFoundException } from '@nestjs/common';
-import { Request } from 'express';
 import { UserService } from './user.service';
 import { createUserDTO } from './dtos/create-user.dto';
+import { User } from './user.entity';
+import * as bcrypt from 'bcrypt';
+import { DataSource } from 'typeorm';
+//import { Request } from 'express';
 
 
 @Controller('users/')
@@ -24,8 +27,10 @@ export class UserController {
 
     @Post('create')
     async createUser(@Body() createUserDTO: createUserDTO){
-        const user = await this.userService.createUser(createUserDTO);
-        return user;
+        const newUser = await this.userService.createUser(createUserDTO);
+        newUser.password = await bcrypt.hash(newUser.password, 10);
+        //newUser.save();
+        return newUser;
     }
 
     @Delete('delete/:id')

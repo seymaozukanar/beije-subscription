@@ -1,17 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Address } from 'src/address/address.entity'
+
 
 @Entity()
 export class User {
+
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   username: string;
 
-  @Column()
+  @Column({nullable: true})
   firstName: string;
 
-  @Column()
+  @Column({nullable: true})
   lastName: string;
 
   @Column()
@@ -19,4 +22,8 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToOne(() => Address, (address) => address.user, { cascade: true, onDelete: 'SET NULL' })
+  @JoinColumn()
+  address: Address;
 }

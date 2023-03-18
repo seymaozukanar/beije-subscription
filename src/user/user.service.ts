@@ -7,13 +7,14 @@ import { createUserDTO } from './dtos/create-user.dto';
 
 
 @Injectable()
-export class UserService {
+export class UserService{
+
     constructor(
         @InjectRepository(User)
         private usersRepository: Repository<User>,
-      ) {}
+      ){}
 
-    async getUsers(): Promise<User[]>{
+    async getUsers(){
       const users = await this.usersRepository.find();
       return users;
     }
@@ -26,10 +27,11 @@ export class UserService {
     async createUser(createUserDTO: createUserDTO): Promise<User>{
       const newUser = await this.usersRepository.create(createUserDTO);
       //return newUser.save();
-      return this.usersRepository.save(newUser);
+      this.usersRepository.save(newUser);
+      return newUser;
     }
 
-    async deleteUser(id: number): Promise<any>{
+    async deleteUser(id: number){
       const deletedUser = this.usersRepository.delete({id:id});
       return deletedUser;
     }
