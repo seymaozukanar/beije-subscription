@@ -25,7 +25,7 @@ export class UserController {
         return user;
     }
 
-    @Post('create')
+    @Post(':id')
     async createUser(@Body() createUserDTO: createUserDTO){
         const newUser = await this.userService.createUser(createUserDTO);
         newUser.password = await bcrypt.hash(newUser.password, 10);
@@ -33,7 +33,7 @@ export class UserController {
         return newUser;
     }
 
-    @Delete('delete/:id')
+    @Delete(':id')
     async deleteUser(@Param('id') id: number){
         const user = await this.userService.deleteUser(id);
         if (!user) throw new NotFoundException('User with the given ID does not exist!');

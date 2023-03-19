@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Put, Body, Param, Request, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Body, Param, Request } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
 import { createSubscriptionDTO } from './dtos/create-subscription.dto';
 
@@ -35,7 +35,6 @@ export class SubscriptionController {
     async updateSubscription(@Param('id') id: number, @Request() req, @Body() createSubscriptionDTO: createSubscriptionDTO){
         const userID = req.user.userID;
         const updatedSubscription = await this.subscriptionService.updateSubscription(userID, id, createSubscriptionDTO);
-        if (!updatedSubscription) throw new NotFoundException('Subscription does not exist!');
         return updatedSubscription;
     }
 }

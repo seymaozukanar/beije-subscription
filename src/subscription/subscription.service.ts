@@ -41,11 +41,11 @@ export class SubscriptionService {
     // update otherwise
     async updateSubscription(userID: number, id: number, createSubscriptionDTO: createSubscriptionDTO){
         const updatedSubscription = await this.subscriptionRepository.findOneBy({id:id});
-        if (updatedSubscription) {
+        if (updatedSubscription){
             this.subscriptionRepository.update(id, createSubscriptionDTO);
             return updatedSubscription;
         }
-        else {
+        else{
             const newSubscription = await this.createSubscription(userID, createSubscriptionDTO);
             return newSubscription;
         }

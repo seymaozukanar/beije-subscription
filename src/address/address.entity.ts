@@ -20,6 +20,6 @@ export class Address{
     @Column()
     country: string;
 
-    @OneToOne(() => User, (user) => user.address)
+    @OneToOne(() => User, (user) => user.address, { cascade: true, onDelete: 'SET NULL' })
     user: User;
 }

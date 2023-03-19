@@ -12,7 +12,7 @@ export class UserService{
     constructor(
         @InjectRepository(User)
         private usersRepository: Repository<User>,
-      ){}
+    ){}
 
     async getUsers(){
       const users = await this.usersRepository.find();
