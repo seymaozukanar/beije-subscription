@@ -9,16 +9,16 @@ export class Address{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ length: 150, nullable: false })
     address: string;
 
-    @Column()
+    @Column({ type: 'int', width: 5, nullable: false })
     zipCode: number;
 
-    @Column()
+    @Column({ length:55, nullable:false })
     city: string;
 
-    @Column()
+    @Column({ length:55, nullable:false })
     country: string;
 
     @OneToOne(() => User, (user) => user.address, { cascade: true, onDelete: 'SET NULL' })
