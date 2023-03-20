@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany } from 'typeorm';
 import { User } from 'src/user/user.entity'
+import { Order } from 'src/order/order.entity';
 
 
 @Entity()
@@ -22,4 +23,7 @@ export class Address{
 
     @OneToOne(() => User, (user) => user.address, { cascade: true, onDelete: 'SET NULL' })
     user: User;
+
+    @OneToMany(() => Order, (order) => order.address, { cascade: true, onDelete: 'SET NULL' })
+    orders: Order[];
 }

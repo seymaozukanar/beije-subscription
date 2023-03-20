@@ -6,7 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { User } from './user/user.entity';
 import { AddressModule } from './address/address.module';
-
+import { SubscriptionModule } from './subscription/subscription.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [UserModule,
@@ -22,6 +23,8 @@ import { AddressModule } from './address/address.module';
               autoLoadEntities: true,
       }),
             AddressModule,
+            SubscriptionModule,
+            OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

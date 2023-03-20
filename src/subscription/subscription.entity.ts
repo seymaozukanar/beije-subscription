@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, OneToMany } from 'typeorm';
 import { User } from 'src/user/user.entity';
+import { Order } from 'src/order/order.entity';
 
 
 @Entity()
@@ -22,4 +23,7 @@ export class Subscription{
 
     @OneToOne(() => User, (user) => user.subscription, { cascade: true, onDelete: 'SET NULL' })
     user: User;
+
+    @OneToMany(() => Order, (order) => order.subscription, { cascade: true, onDelete: 'SET NULL' })
+    orders: Order[];
 }
