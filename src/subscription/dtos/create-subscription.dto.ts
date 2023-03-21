@@ -1,7 +1,8 @@
-import { User } from '../../user/user.entity';
 import { IsBoolean, IsNumber } from 'class-validator';
+import { createUserDTO } from 'src/user/dtos/create-user.dto';
 
 export class createSubscriptionDTO {
+
   @IsNumber({ allowNaN: false })
   numberOfUnits: number;
 
@@ -9,7 +10,7 @@ export class createSubscriptionDTO {
   frequency: number;
 
   @IsBoolean()
-  isActive: boolean;
+  isActive: boolean = true;
 
-  user: User;
+  user: createUserDTO;
 }

@@ -1,4 +1,5 @@
 import { IsNumber, IsString, MaxLength, IsNotEmpty } from 'class-validator';
+import { createUserDTO } from 'src/user/dtos/create-user.dto';
 
 export class createAddressDTO {
   @IsString()
@@ -18,4 +19,6 @@ export class createAddressDTO {
   @MaxLength(55)
   @IsNotEmpty()
   country: string;
+
+  user: createUserDTO;
 }
