@@ -26,6 +26,11 @@ export class AddressService {
     return newAddress;
   }
 
+  async updateAddress(id: number, createAddressDTO: createAddressDTO) {
+    const updatedAddress = await this.addressRepository.update({ id:id }, createAddressDTO);
+    return updatedAddress;
+  }
+
   async deleteAddress(id: number) {
     const deletedAddress = this.addressRepository.delete({ id: id });
     return deletedAddress;

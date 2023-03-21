@@ -1,5 +1,4 @@
 import { IsBoolean, IsNumber } from 'class-validator';
-import { createUserDTO } from 'src/user/dtos/create-user.dto';
 
 export class createSubscriptionDTO {
 
@@ -11,6 +10,4 @@ export class createSubscriptionDTO {
 
   @IsBoolean()
   isActive: boolean = true;
-
-  user: createUserDTO;
 }

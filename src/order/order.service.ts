@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Order } from './order.entity';
+import { Repository, In } from 'typeorm';
+import { Order, orderStatus } from './order.entity';
 
 @Injectable()
 export class OrderService {
@@ -10,13 +10,19 @@ export class OrderService {
     private orderRepository: Repository<Order>,
   ) {}
 
-  async getOrders() {
-    const orders = this.orderRepository.find();
+  async getActiveOrders() {
+    const orders = this.orderRepository.find({ where: { status: orderStatus.RECEIVED }});
     return orders;
   }
 
-  async createOrder() {
-    const newOrder = this.orderRepository.create();
-    return newOrder;
+  async getProcessedOrders() {
+    const statusOptions = [orderStatus.CANCELLED, orderStatus.COMPLETED, orderStatus.DELIVERED, orderStatus.NOT_DELIVERED, orderStatus.ON_THE_WAY];
+    const orders = this.orderRepository.find({ where: { status: In(statusOptions) } });
+    return orders;
+  }
+
+  async getOrder(id: number) {
+    const order = this.orderRepository.findOneBy({ id:id });
+    return order;
   }
 }

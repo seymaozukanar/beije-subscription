@@ -27,6 +27,11 @@ export class UserService {
     return newUser;
   }
 
+  async updateUser(id: number, createUserDTO: createUserDTO) {
+    const updatedUser = await this.usersRepository.update(id, createUserDTO);
+    return updatedUser;
+  }
+
   async deleteUser(id: number) {
     const deletedUser = this.usersRepository.delete({ id: id });
     return deletedUser;
