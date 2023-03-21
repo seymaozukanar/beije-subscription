@@ -13,6 +13,9 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ default: true })
+  isActive: boolean;
+
   @Column({ unique: true, nullable: false, length: 55 })
   username: string;
 

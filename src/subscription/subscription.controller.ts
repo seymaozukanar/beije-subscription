@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Put, Body, Param, Request, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Put, Body, Param, Request, NotFoundException } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
 import { createSubscriptionDTO } from './dtos/create-subscription.dto';
 
@@ -34,9 +34,10 @@ export class SubscriptionController {
     return newSubscription;
   }
 
-  @Delete(':id')
-  async deleteSubscription(@Param('id') id: number) {
-    this.subscriptionService.deleteSubscription(id);
+  @Put(':id')
+  async cancelSubscription(@Param('id') id: number) {
+    const cancelledSubscription = await this.subscriptionService.cancelSubscription(id);
+    return cancelledSubscription;
   }
 
   @Put(':id')

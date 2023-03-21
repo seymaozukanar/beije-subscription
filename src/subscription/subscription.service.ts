@@ -42,8 +42,13 @@ export class SubscriptionService {
     return newSubscription;
   }
 
-  async deleteSubscription(id: number) {
-    this.subscriptionRepository.delete({ id: id });
+  async cancelSubscription(id: number) {
+    const cancelledSubscription = await this.subscriptionRepository.findOneBy({
+      id: id,
+    });
+    cancelledSubscription.isActive = false;
+    this.subscriptionRepository.save(cancelledSubscription);
+    return cancelledSubscription;
   }
 
   // create a new instance if there is no subscription with given id

@@ -30,9 +30,4 @@ export class AddressService {
     const updatedAddress = await this.addressRepository.update({ id:id }, createAddressDTO);
     return updatedAddress;
   }
-
-  async deleteAddress(id: number) {
-    const deletedAddress = this.addressRepository.delete({ id: id });
-    return deletedAddress;
-  }
 }

@@ -33,7 +33,9 @@ export class UserService {
   }
 
   async deleteUser(id: number) {
-    const deletedUser = this.usersRepository.delete({ id: id });
+    const deletedUser = await this.usersRepository.findOneBy({ id:id });
+    deletedUser.isActive = false;
+    this.usersRepository.save(deletedUser);
     return deletedUser;
   }
 }
