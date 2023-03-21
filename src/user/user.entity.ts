@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Address } from '../address/address.entity';
 import { Subscription } from '../subscription/subscription.entity';
 

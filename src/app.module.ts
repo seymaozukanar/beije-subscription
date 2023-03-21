@@ -12,6 +12,7 @@ import { Subscription } from './subscription/subscription.entity';
 import { Order } from './order/order.entity';
 import { Address } from './address/address.entity';
 import { ScheduleModule } from '@nestjs/schedule';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ScheduleModule } from '@nestjs/schedule';
       autoLoadEntities: true,
     }),
     ScheduleModule.forRoot(),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
