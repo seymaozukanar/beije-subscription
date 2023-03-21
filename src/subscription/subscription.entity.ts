@@ -1,29 +1,40 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  OneToOne,
+  OneToMany,
+} from 'typeorm';
 import { User } from '../user/user.entity';
 import { Order } from '../order/order.entity';
 
-
 @Entity()
-export class Subscription{
+export class Subscription {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @CreateDateColumn()
+  creationDatetime: Date;
 
-    @CreateDateColumn()
-    creationDatetime: Date;
+  @Column({ default: true })
+  isActive: boolean;
 
-    @Column({ default: true })
-    isActive: boolean;
+  @Column({ nullable: false, default: 0 })
+  numberOfUnits: number;
 
-    @Column({ nullable: false, default: 0 })
-    numberOfUnits: number;
+  @Column({ nullable: false, default: 0 })
+  frequency: number; // in terms of month
 
-    @Column({ nullable: false, default:0 })
-    frequency: number; // in terms of month
+  @OneToOne(() => User, (user) => user.subscription, {
+    cascade: true,
+    onDelete: 'SET NULL',
+  })
+  user: User;
 
-    @OneToOne(() => User, (user) => user.subscription, { cascade: true, onDelete: 'SET NULL' })
-    user: User;
-
-    @OneToMany(() => Order, (order) => order.subscription, { cascade: true, onDelete: 'SET NULL' })
-    orders: Order[];
+  @OneToMany(() => Order, (order) => order.subscription, {
+    cascade: true,
+    onDelete: 'SET NULL',
+  })
+  orders: Order[];
 }

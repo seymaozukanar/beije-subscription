@@ -1,29 +1,39 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany } from 'typeorm';
-import { User } from '../user/user.entity'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  OneToMany,
+} from 'typeorm';
+import { User } from '../user/user.entity';
 import { Order } from '../order/order.entity';
 
-
 @Entity()
-export class Address{
+export class Address {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column({ length: 155, nullable: false })
+  address: string;
 
-    @Column({ length: 155, nullable: false })
-    address: string;
+  @Column({ type: 'int', width: 5, nullable: false })
+  zipCode: number;
 
-    @Column({ type: 'int', width: 5, nullable: false })
-    zipCode: number;
+  @Column({ length: 55, nullable: false })
+  city: string;
 
-    @Column({ length:55, nullable:false })
-    city: string;
+  @Column({ length: 55, nullable: false })
+  country: string;
 
-    @Column({ length:55, nullable:false })
-    country: string;
+  @OneToOne(() => User, (user) => user.address, {
+    cascade: true,
+    onDelete: 'SET NULL',
+  })
+  user: User;
 
-    @OneToOne(() => User, (user) => user.address, { cascade: true, onDelete: 'SET NULL' })
-    user: User;
-
-    @OneToMany(() => Order, (order) => order.address, { cascade: true, onDelete: 'SET NULL' })
-    orders: Order[];
+  @OneToMany(() => Order, (order) => order.address, {
+    cascade: true,
+    onDelete: 'SET NULL',
+  })
+  orders: Order[];
 }

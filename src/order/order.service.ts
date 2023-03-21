@@ -5,19 +5,18 @@ import { Order } from './order.entity';
 
 @Injectable()
 export class OrderService {
+  constructor(
+    @InjectRepository(Order)
+    private orderRepository: Repository<Order>,
+  ) {}
 
-    constructor(
-        @InjectRepository(Order)
-        private orderRepository: Repository<Order>,
-      ){}
+  async getOrders() {
+    const orders = this.orderRepository.find();
+    return orders;
+  }
 
-      async getOrders(){
-        const orders = this.orderRepository.find();
-        return orders;
-      }
-
-      async createOrder(subscriptionID: number, address: string){
-        const newOrder = this.orderRepository.create();
-        return newOrder;
-      }
+  async createOrder() {
+    const newOrder = this.orderRepository.create();
+    return newOrder;
+  }
 }

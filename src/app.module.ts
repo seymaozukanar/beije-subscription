@@ -14,44 +14,46 @@ import { Address } from './address/address.entity';
 import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
-  imports: [UserModule,
-            AddressModule,
-            SubscriptionModule,
-            OrderModule,
-            TypeOrmModule.forRoot({
-              type: 'mysql',
-              host: '127.0.0.1',
-              port: 3000,
-              username: 'root',
-              password: 'root',
-              database: 'test',
-              entities: [Address, Order, Subscription, User],
-              synchronize: true,
-              autoLoadEntities: true,
-      }),
-            ScheduleModule.forRoot(),
+  imports: [
+    UserModule,
+    AddressModule,
+    SubscriptionModule,
+    OrderModule,
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: '127.0.0.1',
+      port: 3000,
+      username: 'root',
+      password: 'root',
+      database: 'test',
+      entities: [Address, Order, Subscription, User],
+      synchronize: true,
+      autoLoadEntities: true,
+    }),
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  constructor( dataSource: DataSource) {}
+  //constructor(dataSource: DataSource) {}
 }
 
 export const dataSource = new DataSource({
-  type: "mysql",
-  host: "127.0.0.1",
+  type: 'mysql',
+  host: '127.0.0.1',
   port: 3000,
-  username: "test",
-  password: "test",
-  database: "test",
+  username: 'test',
+  password: 'test',
+  database: 'test',
   entities: [User, Subscription, Order, Address],
-})
+});
 
-dataSource.initialize()
+dataSource
+  .initialize()
   .then(() => {
-      console.log("Data Source has been initialized!")
+    console.log('Data Source has been initialized!');
   })
   .catch((err) => {
-      console.error("Error during Data Source initialization", err)
-  })
+    console.error('Error during Data Source initialization', err);
+  });
