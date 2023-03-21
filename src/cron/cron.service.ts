@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { SchedulerRegistry } from '@nestjs/schedule';
 import { CronJob } from 'cron';
-import { Subscription } from 'src/subscription/subscription.entity';
-import { dataSource } from 'src/app.module';
-import { Order, orderStatus } from 'src/order/order.entity';
+import { Subscription } from '../subscription/subscription.entity';
+import { dataSource } from '../app.module';
+import { Order, orderStatus } from '../order/order.entity';
 
 @Injectable()
 export class CronService {

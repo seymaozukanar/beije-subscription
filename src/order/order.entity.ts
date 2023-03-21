@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm';
-import { Address } from 'src/address/address.entity';
-import { Subscription } from 'src/subscription/subscription.entity';
+import { Address } from '../address/address.entity';
+import { Subscription } from '../subscription/subscription.entity';
 
 export enum orderStatus{
     RECEIVED = 'received',
