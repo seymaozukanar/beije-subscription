@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, NotFoundException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { createUserDTO } from './dtos/create-user.dto';
-import * as bcrypt from 'bcrypt';
 
 @Controller('users/')
 export class UserController {
@@ -25,11 +24,9 @@ export class UserController {
   @Post('/sign-up')
   async createUser(@Body() createUserDTO: createUserDTO) {
     const newUser = await this.userService.createUser(createUserDTO);
-    newUser.password = await bcrypt.hash(newUser.password, 10);
-    //newUser.save();
     return newUser;
   }
-
+ 
   @Put(':id')
   async updateUser(@Param('id') id: number, @Body() createUserDTO: createUserDTO) {
     const updatedUser = await this.userService.updateUser(id, createUserDTO);
