@@ -9,7 +9,7 @@ export class Address{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ length: 150, nullable: false })
+    @Column({ length: 155, nullable: false })
     address: string;
 
     @Column({ type: 'int', width: 5, nullable: false })
