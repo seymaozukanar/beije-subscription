@@ -1,3 +1,4 @@
+import { Role } from '../auth/role.enum';
 import {
   Entity,
   Column,
@@ -30,6 +31,9 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column({ default: Role.User })
+  roles: Role[];
 
   @OneToOne(() => Address, (address) => address.user, {
     cascade: true,

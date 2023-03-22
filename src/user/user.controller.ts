@@ -1,11 +1,14 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, NotFoundException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { createUserDTO } from './dtos/create-user.dto';
+import { Role } from '../auth/role.enum';
+import { Roles } from '../auth/roles.decorator';
 
 @Controller('users/')
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @Roles(Role.Admin)
   @Get()
   async getUsers() {
     const users = await this.userService.getUsers();
@@ -19,12 +22,6 @@ export class UserController {
       throw new NotFoundException('User with the given ID does not exist!');
     }
     return user;
-  }
-
-  @Post('/sign-up')
-  async createUser(@Body() createUserDTO: createUserDTO) {
-    const newUser = await this.userService.createUser(createUserDTO);
-    return newUser;
   }
  
   @Put(':id')

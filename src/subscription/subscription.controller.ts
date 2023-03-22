@@ -1,11 +1,14 @@
 import { Controller, Get, Post, Put, Body, Param, Request, NotFoundException } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
 import { createSubscriptionDTO } from './dtos/create-subscription.dto';
+import { Role } from '../auth/role.enum';
+import { Roles } from '../auth/roles.decorator';
 
 @Controller('subscriptions/')
 export class SubscriptionController {
   constructor(private subscriptionService: SubscriptionService) {}
 
+  @Roles(Role.Admin)
   @Get()
   async getSubscriptions() {
     const subscriptions = await this.subscriptionService.getSubscriptions();
@@ -16,7 +19,7 @@ export class SubscriptionController {
   async getSubscription(@Param('id') id: number) {
     const subscription = this.subscriptionService.getSubscription(id);
     if (!subscription) {
-      throw new NotFoundException('User with the given ID does not exist!');
+      throw new NotFoundException('Subscription does not exist!');
     }
     return subscription;
   }

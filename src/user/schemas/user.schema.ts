@@ -1,5 +1,6 @@
 import { EntitySchema } from 'typeorm';
 import { User } from '../../user/user.entity';
+import { Role } from '../../auth/role.enum';
 
 export const UserSchema = new EntitySchema<User>({
   name: 'User',
@@ -39,6 +40,10 @@ export const UserSchema = new EntitySchema<User>({
       type: String,
       nullable: false,
     },
+    roles: {
+      type: 'enum',
+      default: Role.User,
+    }
   },
   relations: {
     address: {
