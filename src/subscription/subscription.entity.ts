@@ -1,13 +1,7 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  OneToOne,
-  OneToMany,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, OneToMany, AfterInsert } from 'typeorm';
 import { User } from '../user/user.entity';
 import { Order } from '../order/order.entity';
+import { CronService } from '../cron/cron.service';
 
 @Entity()
 export class Subscription {
@@ -37,5 +31,15 @@ export class Subscription {
     onDelete: 'SET NULL',
   })
   orders: Order[];
-}
 
+  // to be used in payment flow
+  async calculatePrice() {
+    let totalPrice: number = this.numberOfUnits * 29;
+    return totalPrice;
+  }
+
+  @AfterInsert()
+  createCronOrderTask() {
+    CronService.caller().createOrderTask(this);
+  }
+}

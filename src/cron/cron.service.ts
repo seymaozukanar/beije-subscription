@@ -32,7 +32,7 @@ export class CronService {
     this.schedulerRegistry.addCronJob('orders', task);
     task.start();
 
-    this.logger.warn(`New order has been created for the subscription: 
+    this.logger.warn(`New order task has been created for the subscription: 
             ${subscription.id} of user ${subscription.user.username}`);
   }
 
