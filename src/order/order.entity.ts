@@ -22,7 +22,7 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ update: false })
   creationDatetime: Date;
 
   @Column({ type: 'enum', enum: orderStatus, default: orderStatus.RECEIVED })

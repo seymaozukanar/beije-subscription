@@ -14,7 +14,7 @@ export class Subscription {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ update: false })
   creationDatetime: Date;
 
   @Column({ default: true })
