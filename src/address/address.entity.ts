@@ -13,16 +13,16 @@ export class Address {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 155, nullable: false })
+  @Column({ length: 155 })
   address: string;
 
-  @Column({ type: 'int', width: 5, nullable: false })
+  @Column({ type: 'int', width: 5 })
   zipCode: number;
 
-  @Column({ length: 55, nullable: false })
+  @Column({ length: 55 })
   city: string;
 
-  @Column({ length: 55, nullable: false })
+  @Column({ length: 55 })
   country: string;
 
   @OneToOne(() => User, (user) => user.address, {
@@ -37,3 +37,4 @@ export class Address {
   })
   orders: Order[];
 }
+

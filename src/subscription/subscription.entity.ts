@@ -20,10 +20,10 @@ export class Subscription {
   @Column({ default: true })
   isActive: boolean;
 
-  @Column({ nullable: false, default: 0 })
+  @Column({ default: 0 })
   numberOfUnits: number;
 
-  @Column({ nullable: false, default: 0 })
+  @Column({ default: 0 })
   frequency: number; // in terms of month
 
   @OneToOne(() => User, (user) => user.subscription, {
@@ -38,3 +38,4 @@ export class Subscription {
   })
   orders: Order[];
 }
+

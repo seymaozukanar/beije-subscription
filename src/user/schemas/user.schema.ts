@@ -10,28 +10,48 @@ export const UserSchema = new EntitySchema<User>({
       primary: true,
       generated: true,
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
     username: {
       type: String,
       nullable: false,
       unique: true,
-      length: 30,
+      length: 55,
     },
     firstName: {
       type: String,
-      length: 30,
+      nullable: true,
+      length: 55,
     },
     lastName: {
       type: String,
-      length: 30,
+      nullable: true,
+      length: 55,
     },
     email: {
       type: String,
       nullable: false,
+      unique: true,
     },
     password: {
       type: String,
       nullable: false,
     },
   },
-  relations: {},
+  relations: {
+    address: {
+      type: 'one-to-one',
+      target: 'Address',
+      cascade: true,
+      onDelete: 'SET NULL',
+    },
+    subscription: {
+      type: 'one-to-one',
+      target: 'Subscription',
+      cascade: true,
+      onDelete: 'SET NULL',
+    }
+  },
 });

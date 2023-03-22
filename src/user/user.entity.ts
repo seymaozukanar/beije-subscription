@@ -16,7 +16,7 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
-  @Column({ unique: true, nullable: false, length: 55 })
+  @Column({ unique: true, length: 55 })
   username: string;
 
   @Column({ nullable: true, length: 55 })
@@ -25,10 +25,10 @@ export class User {
   @Column({ nullable: true, length: 55 })
   lastName: string;
 
-  @Column({ unique: true, nullable: false })
+  @Column({ unique: true })
   email: string;
 
-  @Column({ nullable: false })
+  @Column()
   password: string;
 
   @OneToOne(() => Address, (address) => address.user, {
