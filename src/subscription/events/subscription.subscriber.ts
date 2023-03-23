@@ -12,9 +12,5 @@ export class SubscriptionSubscriber implements EntitySubscriberInterface<Subscri
 
   afterInsert(event: InsertEvent<Subscription>) {
     CronService.caller().createOrderTask(event.entity);
-  };
-
-  afterUpdate(event: UpdateEvent<Subscription>) {
-      
   }
 }
