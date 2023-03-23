@@ -15,6 +15,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/roles.guard';
+import { SubscriptionSubscriber } from './subscription/events/subscription.subscriber';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { RolesGuard } from './auth/roles.guard';
       password: 'root',
       database: 'test',
       entities: [Address, Order, Subscription, User],
+      subscribers: [SubscriptionSubscriber],
       synchronize: true,
       autoLoadEntities: true,
     }),
@@ -54,6 +56,7 @@ export const dataSource = new DataSource({
   password: 'test',
   database: 'test',
   entities: [User, Subscription, Order, Address],
+  subscribers: [SubscriptionSubscriber],
 });
 
 dataSource
